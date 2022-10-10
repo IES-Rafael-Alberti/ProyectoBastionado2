@@ -39,7 +39,7 @@ cp grub grub.backup
 Para ocultar el arranque deberemos de modificar la linea de comando que veremos a continuacion en el fichero /etc/grub.d/30_os-prober
 
 Insertar imagen 1
-![This is an image](/img/imagengrub1.png)
+![This is an image](https://github.com/IES-Rafael-Alberti/ProyectoBastionado2/blob/main/img/imagengrub1.png)
 
 
 
