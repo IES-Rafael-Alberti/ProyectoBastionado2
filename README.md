@@ -1,3 +1,13 @@
+author: Pablo Crespo Cervantes
+summary: Resumen del CodeLab 
+id: identificador-unico-del-codelab 
+categories: codelab,markdown 
+environments: Web 
+status: Published 
+feedback link: Un enlace en el que los usuarios puedan darte feedback (quizás creando un issue en un repositorio de git) 
+analytics account: ID de Google Analytics 
+ 
+
 # Proyecto Bastionado 2
 
 En este documento veremos como se puede configurar un sistema informático para que un actor malicioso no pueda alterar la secuencia de arranque con fines de acceso ilegítimo
@@ -6,13 +16,10 @@ En este documento veremos como se puede configurar un sistema informático para 
 
 Durante esta documentación podremos ver las siguientes configuraciones
 
-    Ocultación del arranque
-
-    Contraseña de arranque
-
-    Copia de seguridad
-
-    Otras opciones de seguridad
+- Ocultación del arranque
+- Contraseña de arranque
+- Copia de seguridad
+- Otras opciones de seguridad
 
 ## Ocultación del arranque
 
