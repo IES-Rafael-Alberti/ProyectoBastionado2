@@ -95,7 +95,38 @@ Para crear una copia de seguridad actualmente debemos de copiar/restaurar varios
 - /etc/grub.d/
 - /boot/grub/grub.cfg
 
-podremos hacer un tar de estos archivos o programar un pequeño script que automatice esta tarea.
+Esta copia de seguridad podremos hacerlo de dos formas que ahora veremos
+
+podemos hacer un comando que nos haga un archivo comprimido con la información que necesitamos almacenar.
+
+```sh
+sudo tar zcvf grub2_(fecha).tar /etc/default/grub /etc/grub.d/  /boot/grub/grub.cfg
+```
+
+tambien podremos hacer un tar de estos archivos a traves de un pequeño script que automatice esta tarea.
 
 insertar imagen 9
 
+## Otras opciones de seguridad
+
+Como metodo extra para proteger el arranque podremos cifrar el disco obligando al usuario a introducir la contraseña de desencriptacion del disco duro antes de poder operar, este tipo de configuracion debe hacerse durante la instalación debido por lo que realizaremos una instalación de debian desde 0 para ver los pasos.
+
+Una vez lleguemos al paso para configurar las particiones podremos configurar lois volumenes cifrados en la opcion que vemos en la siguiente imagen
+
+insertar imagen 10
+
+Nos mostrara una alerta diciendo que vamos a mopdificar las particiones del dispositivo.
+
+insertar imagen 11
+
+Tras esto podremos seleccionar los dispositivos que vamos a cifrar y nos permitira elegir si queremos configurar una contraseña nosotros mismos o si queremos que nos genere una aleatoriamente
+
+insertar imagen 12 insertar imagen 13
+
+para finalizar elegiremos una contraseña que se adecue a las necesidades de seguridad y terminaremos de configurar la instalación
+
+insertar imagen 14
+
+tras esto podremos ver en el siguiente arranque el mensaje que nos pedira desencriptar el disco duro.
+
+insertar imagen 15
