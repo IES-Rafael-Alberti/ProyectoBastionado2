@@ -5,7 +5,7 @@ categories: codelab,markdown
 environments: Web 
 status: Published 
 feedback link: Un enlace en el que los usuarios puedan darte feedback (quizás creando un issue en un repositorio de git) 
-analytics account: ID de Google Analytics 
+analytics account: ID de Google Analytics
  
 
 # Proyecto Bastionado 2
@@ -39,9 +39,6 @@ cp grub grub.backup
 Para ocultar el arranque deberemos de modificar la linea de comando que veremos a continuacion en el fichero /etc/grub.d/30_os-prober
 
 Insertar imagen 1
-![This is an image](https://github.com/IES-Rafael-Alberti/ProyectoBastionado2/blob/main/img/imagengrub1.png)
-
-
 
 Por ultimo modificaremos el fichero /etc/default/grub, y cambiaremos las lineas Grub_Timeout = 10 y  GRUB_DISABLE_OS_PROBER tal como vemos en la siguiente imagen
 
