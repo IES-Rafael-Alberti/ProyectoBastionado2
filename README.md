@@ -39,7 +39,7 @@ cp grub grub.backup
 Para ocultar el arranque deberemos de modificar la linea de comando que veremos a continuacion en el fichero /etc/grub.d/30_os-prober
 
 Insertar imagen 1
-![imagen1](./img/imagengrub1.png)
+![imagen1](img/imagengrub1.png)
 
 Por ultimo modificaremos el fichero /etc/default/grub, y cambiaremos las lineas Grub_Timeout = 10 y  GRUB_DISABLE_OS_PROBER tal como vemos en la siguiente imagen
 
@@ -59,21 +59,22 @@ grub-mkpasswd-pbkdf2
 como podemos ver en la siguiente imagen una vez escribamos la contraseña nos aparecera el resultado.
 
 insertar imagen 3
-
+![imagen3](img/imagengrub3.png)
 Una vez tenemos esta contraseña podemos ir al fichero /etc/grub.d/40_custom para añadir las siguientes lineas que nos permitiran configurar el usuario con la contraseña generada anteriormente
 
 insertar imagen 4
-
+![imagen4](img/imagengrub4.png)
 Por ultimo tendremos que hacer un update a grub para que se almacenen los cambios que hemos realizado en los ficheros anteriormente mencionados, para ello utilizaremos el comando
 
 ```sh
 update-grub
 ```
 Insertar imagen 5
-
+![imagen5](img/imagengrub5.png)
 Como podemos ver al reiniciar tras actualizar grub nos aparecera la ventana de inicio de sesión (especifica de grub).
 
 Insertar imagen 6
+![imagen6](img/imagengrub6.png)
 
 #### Configurar usuario
 
@@ -82,7 +83,7 @@ Hemos visto como generar un superusuario con contraseña el cual nos permitira p
 Vamos a crear otro usuario dentro del fichero 40_custom pero esta vez usaremos una contraseña con texto plano para comprobar que tambien funciona.
 
 Insertar imagen 7
-
+![imagen7](img/imagengrub7.png)
 Tras esto iremos al fichero de configuracion 10_linux donde estan las menuentry 
 
 ## Copia de seguridad Grub
@@ -104,6 +105,7 @@ sudo tar zcvf grub2_(fecha).tar /etc/default/grub /etc/grub.d/  /boot/grub/grub.
 tambien podremos hacer un tar de estos archivos a traves de un pequeño script que automatice esta tarea.
 
 insertar imagen 9
+![imagen](img/imagengrub9.png)
 
 ## Otras opciones de seguridad
 
@@ -112,19 +114,21 @@ Como metodo extra para proteger el arranque podremos cifrar el disco obligando a
 Una vez lleguemos al paso para configurar las particiones podremos configurar lois volumenes cifrados en la opcion que vemos en la siguiente imagen
 
 insertar imagen 10
-
+![imagen10](img/imagengrub10.png)
 Nos mostrara una alerta diciendo que vamos a mopdificar las particiones del dispositivo.
 
 insertar imagen 11
-
+![imagen](img/imagengrub11.png)
 Tras esto podremos seleccionar los dispositivos que vamos a cifrar y nos permitira elegir si queremos configurar una contraseña nosotros mismos o si queremos que nos genere una aleatoriamente
 
 insertar imagen 12 insertar imagen 13
-
+![imagen12](img/imagengrub12.png)
+![imagen13](img/imagengrub13.png)
 para finalizar elegiremos una contraseña que se adecue a las necesidades de seguridad y terminaremos de configurar la instalación
 
 insertar imagen 14
-
+![imagen14](img/imagengrub14.png)
 tras esto podremos ver en el siguiente arranque el mensaje que nos pedira desencriptar el disco duro.
 
 insertar imagen 15
+![imagen15](img/imagengrub15.png)
