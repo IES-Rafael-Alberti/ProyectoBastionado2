@@ -1,6 +1,6 @@
 author: Pablo Crespo Cervantes
 summary: Resumen del CodeLab 
-id: Proyecto-bastionado-2 
+id: web 
 categories: codelab,markdown 
 environments: Web 
 status: Published 
