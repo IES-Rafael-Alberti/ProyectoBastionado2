@@ -1,0 +1,24 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2022-10-24T13:08:43+02:00",
+  "id": "Proyecto-bastionado-2",
+  "duration": 0,
+  "title": "Proyecto Bastionado 2",
+  "summary": "Resumen del CodeLab",
+  "source": "README.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "codelab",
+    "markdown"
+  ],
+  "tags": [
+    "web"
+  ],
+  "url": "Proyecto-bastionado-2"
+}

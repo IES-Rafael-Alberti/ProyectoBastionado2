@@ -1,0 +1,115 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Proyecto Bastionado 2</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="Proyecto-bastionado-2"
+                  title="Proyecto Bastionado 2"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Que vamos a ver" duration="0">
+        <p>En este documento veremos como se puede configurar un sistema informático para que un actor malicioso no pueda alterar la secuencia de arranque con fines de acceso ilegítimo</p>
+<p>Durante esta documentación podremos ver las siguientes configuraciones:</p>
+<ul>
+<li>Ocultación del arranque</li>
+<li>Contraseña de arranque</li>
+<li>Copia de seguridad</li>
+<li>Otras opciones de seguridad</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Ocultación del arranque" duration="0">
+        <p>Cuando instalamos un sistema operativo Linux se nos instala de serie un gestor de arranque llamado GRUB, este programa tiene algunas brechas de seguridad que un usuario malintencionado puede aprovechar para acceder a ficheros con información sensible. En esta parte de la documentación vamos a ver como podemos evitar el acceso a este para que el sistema arranque directamente.</p>
+<p>Es recomendable hacer una copia de seguridad de los archivos que vamos a modificar para mantener los originales por si surgiera algun problema, podemos realizarlos usando el siguiente comando si estamos en el directorio:</p>
+<pre><code language="language-sh" class="language-sh">cd /etc/default
+cp grub grub.backup
+</code></pre>
+<p>Para ocultar el arranque deberemos de modificar la linea de comando que veremos a continuacion en el fichero /etc/grub.d/30_os-prober</p>
+<p class="image-container"><img alt="imagen1" src="img/53d21eb97c5dfd.png"></p>
+<p>Por ultimo modificaremos el fichero /etc/default/grub, y cambiaremos las lineas Grub_Timeout = 10 y  GRUB_DISABLE_OS_PROBER tal como vemos en la siguiente imagen</p>
+<p>una vez terminado y guardado los cambios podemos ejecutar sudo update-grub para que los cambios se efectuen.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Contraseña de arranque" duration="0">
+        <p>El siguiente metodo de securización que utilizaremos sera la implantación de una contraseña en el arranque la cual se nos pedira cuando intentemos iniciar el equipo.</p>
+<p>Lo primero que haremos para la configuración sera generar una contraseña segura que utilizaremos en el arranque para ello utilizaremos un comando que tiene grub el cual nos generara una contraseña con hash a partir de la que pongamos nosotros como usuarios.</p>
+<pre><code language="language-sh" class="language-sh">grub-mkpasswd-pbkdf2
+</code></pre>
+<p>como podemos ver en la siguiente imagen una vez escribamos la contraseña nos aparecera el resultado.</p>
+<p><img alt="imagen3" src="img/a9fb7eb1221ff975.png"> Una vez tenemos esta contraseña podemos ir al fichero /etc/grub.d/40_custom para añadir las siguientes lineas que nos permitiran configurar el usuario con la contraseña generada anteriormente</p>
+<p><img alt="imagen4" src="img/23de6d621129458e.png"> Por ultimo tendremos que hacer un update a grub para que se almacenen los cambios que hemos realizado en los ficheros anteriormente mencionados, para ello utilizaremos el comando</p>
+<pre><code language="language-sh" class="language-sh">update-grub
+</code></pre>
+<p><img alt="imagen5" src="img/e1ffaec79cbdee2d.png"> Como podemos ver al reiniciar tras actualizar grub nos aparecera la ventana de inicio de sesión (especifica de grub).</p>
+<p class="image-container"><img alt="imagen6" src="img/e8c346cca6eb56ff.png"></p>
+<h3 is-upgraded>Configurar usuario</h3>
+<p>Hemos visto como generar un superusuario con contraseña el cual nos permitira proteger grub pero es posible segun la configuracion que estemos haciendo que solo queramos generar un usuario normal para ello deberemos seguir los mismos pasos pero tendremos que modificar la entrada de menu para darle acceso al usuario con el que estemos trabajando.</p>
+<p>Vamos a crear otro usuario dentro del fichero 40_custom pero esta vez usaremos una contraseña con texto plano para comprobar que tambien funciona.</p>
+<p><img alt="imagen7" src="img/789a1dfb7e127798.png"> Tras esto iremos al fichero de configuracion 10_linux donde estan las menuentry</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Copia de seguridad Grub" duration="0">
+        <p>Para crear una copia de seguridad actualmente debemos de copiar/restaurar varios archivos, antiguamente con grub solo hacia falta recuperar errl archivo /boot/grub/menu.lst pero con grub 2 deberemos de recuperar los siguientes archivos/directorios</p>
+<ul>
+<li>/etc/default/grub</li>
+<li>/etc/grub.d/</li>
+<li>/boot/grub/grub.cfg</li>
+</ul>
+<p>Esta copia de seguridad podremos hacerlo de dos formas que ahora veremos</p>
+<p>podemos hacer un comando que nos haga un archivo comprimido con la información que necesitamos almacenar.</p>
+<pre><code language="language-sh" class="language-sh">sudo tar zcvf grub2_(fecha).tar /etc/default/grub /etc/grub.d/  /boot/grub/grub.cfg
+</code></pre>
+<p>tambien podremos hacer un tar de estos archivos a traves de un pequeño script que automatice esta tarea.</p>
+<p class="image-container"><img alt="imagen" src="img/1b83dbbe7bb86f.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Otras opciones de seguridad" duration="0">
+        <p>Como metodo extra para proteger el arranque podremos cifrar el disco obligando al usuario a introducir la contraseña de desencriptacion del disco duro antes de poder operar, este tipo de configuracion debe hacerse durante la instalación debido por lo que realizaremos una instalación de debian desde 0 para ver los pasos.</p>
+<p>Una vez lleguemos al paso para configurar las particiones podremos configurar lois volumenes cifrados en la opcion que vemos en la siguiente imagen</p>
+<p><img alt="imagen10" src="img/31561bbc4a819525.png"> Nos mostrara una alerta diciendo que vamos a mopdificar las particiones del dispositivo.</p>
+<p><img alt="imagen" src="img/67d1f8ec7ff55efb.png"> Tras esto podremos seleccionar los dispositivos que vamos a cifrar y nos permitira elegir si queremos configurar una contraseña nosotros mismos o si queremos que nos genere una aleatoriamente</p>
+<p><img alt="imagen12" src="img/1b5af8e57db5b704.png"><img alt="imagen13" src="img/e1913e937b232364.png"> para finalizar elegiremos una contraseña que se adecue a las necesidades de seguridad y terminaremos de configurar la instalación</p>
+<p><img alt="imagen14" src="img/76d20ee15ba43b62.png"> tras esto podremos ver en el siguiente arranque el mensaje que nos pedira desencriptar el disco duro.</p>
+<p class="image-container"><img alt="imagen15" src="img/5046acf375c05863.png"></p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
